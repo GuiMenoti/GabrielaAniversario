@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Convite da Gabriela</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-blue-950 text-white">
+
+<!-- TELA INICIAL COM FUNDO -->
+<div id="tela-inicial"
+     class="min-h-screen bg-cover bg-center flex flex-col items-center justify-center px-6 text-center relative"
+     style="background-image: url('./belafera2.jpg'); background-size: cover;background-repeat: no-repeat;">
+
+  <!-- Sobreposição escura para contraste -->
+  <div class="absolute inset-0 bg-blue-950 bg-opacity-80"></div>
+
+  <!-- Conteúdo -->
+  <div class="relative z-10">
+    <h1 class="text-4xl font-bold text-yellow-300 mb-4 drop-shadow-lg">Meu grande dia</h1>
+    <p class="text-yellow-100 mb-6 text-lg drop-shadow">Uma noite, um sonho, um novo começo... Você faz parte disso!</p>
+    <button onclick="abrirModal()"
+      class="bg-yellow-400 text-blue-950 font-bold px-6 py-3 rounded-full shadow-md hover:bg-yellow-300 transition-all">
+      Entrar no convite
+    </button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+  <div class="bg-white text-blue-950 rounded-xl p-6 w-11/12 max-w-md shadow-xl fade-in">
+    <h2 class="text-xl font-bold mb-4 text-center">Antes de entrar no convite</h2>
+    <label class="block text-sm font-semibold mb-2">Seu nome:</label>
+    <input type="text" id="nomeInput" class="w-full p-2 mb-4 border border-gray-300 rounded" placeholder="Digite seu nome">
+    <label class="block text-sm font-semibold mb-2">Seu telefone:</label>
+    <input type="tel" id="telefoneInput" class="w-full p-2 mb-6 border border-gray-300 rounded" placeholder="(99) 99999-9999">
+    <button onclick="salvarDados()" class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold py-2 rounded">
+      Acessar convite
+    </button>
+  </div>
+</div>
+
+<!-- CONVITE -->
+<div id="convite" class="hidden">
+
+  <!-- Cabeçalho -->
+  <section class="text-center py-8 px-4">
+    <h1 class="text-4xl font-bold text-yellow-400">Você está convidado!</h1>
+    <p class="mt-2 text-lg text-yellow-100">Para um dia mágico com Gabriela</p>
+  </section>
+
+  <!-- Foto -->
+  <section class="flex flex-col items-center px-4">
+    <img src="imggabriela.jpg" style="background-size: contain;" alt="Gabriela"
+         class="rounded-full border-4 border-yellow-400 shadow-lg w-48 h-48 mb-4">
+    <p class="text-center text-base text-yellow-50 max-w-sm">
+      Uma linda princesa chamada <strong class="text-yellow-300">Gabriela</strong> vai celebrar mais um ano de encantos,
+      e você é nosso convidado especial! 🌹
+    </p>
+  </section>
+
+  <!-- Detalhes -->
+  <section class="bg-yellow-100 text-blue-950 mt-8 mx-4 rounded-xl p-5 shadow-md">
+    <h2 class="text-xl font-bold text-center mb-4">Detalhes da Festa</h2>
+    <div class="space-y-3 text-sm">
+      <div class="flex items-center">
+        <i data-lucide="calendar" class="w-5 h-5 mr-2 text-blue-800"></i>
+        <span><strong>Data:</strong> 12 de Julho de 2025</span>
+      </div>
+      <div class="flex items-center">
+        <i data-lucide="clock" class="w-5 h-5 mr-2 text-blue-800"></i>
+        <span><strong>Hora:</strong> 20:00</span>
+      </div>
+      <div class="flex items-center">
+        <i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-800"></i>
+        <span><strong>Local:</strong> Salão Encantado, Rua das Rosas, 123</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tema -->
+  <section class="mt-8 text-center px-6">
+    <h2 class="text-xl font-semibold text-yellow-300 mb-2">Tema: A Bela e a Fera</h2>
+    <p class="text-yellow-100 text-sm">Vista seu traje encantado e venha celebrar com Gabriela!</p>
+  </section>
+
+  <!-- Confirmar Presença -->
+  <section class="mt-10 text-center px-6">
+    <p class="text-sm mb-4 text-yellow-100">Clique abaixo para confirmar sua presença:</p>
+    <a id="whatsappLink" href="#" target="_blank"
+       class="inline-block bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold py-3 px-6 rounded-full shadow-lg transition-all">
+      Confirmar Presença
+    </a>
+  </section>
+
+  <footer class="text-center mt-12 mb-6 text-yellow-200 text-xs">
+    Com carinho, <span class="text-yellow-400 font-semibold">Gabriela 💛</span>
+  </footer>
+</div>
+
+<script>
+  function abrirModal() {
+    document.getElementById('modal').classList.remove('hidden');
+  }
+
+  function salvarDados() {
+    const nome = document.getElementById('nomeInput').value.trim();
+    const telefone = document.getElementById('telefoneInput').value.trim();
+
+    if (nome === '' || telefone === '') {
+      alert("Por favor, preencha seu nome e telefone.");
+      return;
+    }
+
+    const convite = document.getElementById('convite');
+    const telaInicial = document.getElementById('tela-inicial');
+    const modal = document.getElementById('modal');
+
+    // Criar link do WhatsApp
+    const msg = `Olá Gabriela! 💛\n\nRecebi o convite encantado e confirmo minha presença na sua festa!\n\n👤 Nome: ${nome}\n📱 Telefone: ${telefone}`;
+    const telefoneGabriela = "5511991855154"; // substitua pelo número real da Gabriela (com DDD)
+    const url = `https://wa.me/${telefoneGabriela}?text=${encodeURIComponent(msg)}`;
+
+    document.getElementById("whatsappLink").href = url;
+
+    // Mostrar convite
+    telaInicial.style.display = "none";
+    modal.classList.add("hidden");
+    convite.classList.remove("hidden");
+    convite.classList.add("fade-in");
+    lucide.createIcons();
+  }
+</script>
+
+</body>
+</html>
